@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        return Category::all();
     }
 
     /**
@@ -25,7 +25,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = Category::create($request->all());
+        return $product;
     }
 
     /**
@@ -36,7 +37,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return $category;
     }
 
     /**
@@ -48,7 +49,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $category->update($request->all());
     }
 
     /**
@@ -59,6 +60,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        return response()->json('Delete complete',200);
     }
 }
