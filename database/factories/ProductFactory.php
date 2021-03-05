@@ -24,6 +24,8 @@ class ProductFactory extends Factory
         return [
             'name' => $this->faker->name,
             'price' => $this->faker->numberBetween(10000,60000),
+            'category_id' => 1,
+
         ];
     }
 }
