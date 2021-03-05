@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\{Product,Category};
+use App\Models\{Product,Category,User,Role};
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Laravel\Sanctum\Sanctum;
@@ -33,5 +33,15 @@ class ProductControllerTest extends TestCase
         $product->category_id = 1;
 
         $this->assertInstanceOf(Category::class, $product->category);
+    }
+
+    public function test_user_belongs_to_role()
+    {
+        $role = Role::factory()->create();
+        $user = User::factory()->create([
+            'role_id' => $role->id,
+        ]);
+
+        $this->assertInstanceOf(Role::class, $user->role);
     }
 }
