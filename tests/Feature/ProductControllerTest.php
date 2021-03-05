@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\{Product,User};
+use App\Models\{Product,Category};
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Laravel\Sanctum\Sanctum;
@@ -15,15 +15,23 @@ class ProductControllerTest extends TestCase
      *
      * @return void
      */
-    public function test_index()
-    {   
-        // $user = User::factory(1)->create();
-        // Sanctum::actingAs($user);
+    // public function test_index()
+    // {   
+    //     // $user = User::factory(1)->create();
+    //     // Sanctum::actingAs($user);
 
-        $response = $this->getJson('/api/products');
+    //     $response = $this->getJson('/api/products');
 
-        $response->assertSuccessful();
-        //$response->assertHeader('content-type', 'application/json');
-        $response->assertJsonCount(10);
+    //     $response->assertSuccessful();
+    //     //$response->assertHeader('content-type', 'application/json');
+    //     $response->assertJsonCount(10);
+    // }
+    public function test_product_belongs_to_category()
+    {
+        $product = Product::factory()->create();
+        $category = Category::factory()->create();
+        $product->category_id = 1;
+
+        $this->assertInstanceOf(Category::class, $product->category);
     }
 }

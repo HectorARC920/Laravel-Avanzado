@@ -18,9 +18,11 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->float('price');
             $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('created_by');
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('created_by')->references('id')->on('users');
         });
     }
 
